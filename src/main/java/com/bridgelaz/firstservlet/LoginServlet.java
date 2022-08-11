@@ -30,7 +30,9 @@ public class LoginServlet extends HttpServlet {
         String userId = getServletConfig().getInitParameter("user");
         String password = getServletConfig().getInitParameter("password");
 
-        if (userId.equals(user) && password.equals(pwd)) {
+        Boolean userNameValidator = Pattern.matches(("[A-Z][a-z]{3,}"), user);
+
+        if (userNameValidator && userId.equals(user) && password.equals(pwd)) {
             request.setAttribute("user", user);
             request.getRequestDispatcher("LoginSuccess.jsp").forward(request, response);
         } else {
